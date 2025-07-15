@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>移動距離計算機</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>移動距離計算機</h1>
+    <div class="input-group">
+      <label>隊長數：</label>
+      <input type="number" id="leaderCount" value="1" min="0" />
+    </div>
+    <div class="input-group">
+      <label>擅長數：</label>
+      <input type="number" id="favCount" value="4" min="0" />
+    </div>
+    <div class="input-group">
+      <label>不擅長數：</label>
+      <input type="number" id="unfavCount" value="0" min="0" />
+    </div>
+    <div class="input-group">
+      <label>歌曲獎勵 (Km)：</label>
+      <select id="songBonus">
+        <option value="0">無</option>
+        <option value="2">有 (+2Km)</option>
+      </select>
+    </div>
+    <div class="input-group">
+      <label>遊玩獎勵 (Km)：</label>
+      <select id="playBonus">
+        <option value="0">無</option>
+        <option value="1">2人以上或邀請 +1Km</option>
+        <option value="2">FULL COMBO +2Km</option>
+        <option value="3">ALL PERFECT +3Km</option>
+        <option value="4">FULL SYNC +4Km</option>
+      </select>
+    </div>
+    <div class="input-group">
+      <label>實際曲數 (track)：<span style="font-weight:normal;font-size:13px;">（單人1道=3首，雙人1道=4首，<span style="color:#c00;">本計算皆以3首=1道計價</span>）</span></label>
+      <input type="number" id="trackCount" value="4" min="1" />
+    </div>
+    <div class="input-group">
+      <label>票券倍率：</label>
+      <select id="ticketType">
+        <option value="1,1">1倍 (1道1票券)</option>
+        <option value="2,1">2倍 (1道1票券，但距離算2倍)</option>
+        <option value="3,2">3倍 (1道2票券，距離算3倍)</option>
+      </select>
+    </div>
+    <div class="input-group">
+      <label>每道價格 (円)：</label>
+      <input type="number" id="perUnitPrice" value="100" min="0" />
+    </div>
+    <div class="input-group">
+      <label>目標距離 (Km)：</label>
+      <input type="number" id="targetDistance" value="1200" min="0" />
+    </div>
+
+    <button id="calculateBtn">計算</button>
+    <button id="logBtn">輸出資料 Log</button>
+
+    <div id="result" class="result"></div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
