@@ -72,10 +72,10 @@
       <label>遊玩獎勵：</label>
       <select id="playBonus">
         <option value="0">無</option>
-        <option value="1">2人以上或邀請 +1Km</option>
-        <option value="2">FULL COMBO +2Km</option>
-        <option value="3">ALL PERFECT +3Km</option>
-        <option value="4">FULL SYNC +4Km</option>
+        <option value="1">2人以上或邀請 (+1Km)</option>
+        <option value="2">FULL COMBO (+2Km)</option>
+        <option value="3">ALL PERFECT (+3Km)</option>
+        <option value="4">FULL SYNC (+4Km)</option>
       </select>
     </div>
     <div class="input-group">
@@ -83,11 +83,11 @@
       <input type="number" id="trackCount" value="4" min="3" max="4"/>
     </div>
     <div class="input-group">
-      <label>票券倍率：</label>
+      <label>加速券：</label>
       <select id="ticketType">
         <option value="1,0">無</option>
-        <option value="2,1">ちほー進行2倍チケット</option>
-        <option value="3,2">ちほー進行3倍チケット</option>
+        <option value="2,1">2倍加速券</option>
+        <option value="3,2">3倍加速券</option>
       </select>
     </div>
     <div class="input-group">
@@ -99,13 +99,21 @@
       <input type="number" id="targetDistance" value="1200" min="0" />
     </div>
 
-    <button id="calculateBtn">計算</button>
-    <button id="logBtn">輸出資料 Log</button>
+    <div class="button-group">
+      <button id="calculateBtn">計算</button>
+    </div>
 
     <div id="result" class="result"></div>
   </div>
 
+  <div style="text-align:center;margin-top:32px;color:#888;font-size:14px;">
+    <span>maimai DX 移動距離計算機</span>
+    <br>
+    <span>專案連結：<a href="https://github.com/XingYanTW/chiho-calculator/" target="_blank" style="color:#007bff;">GitHub</a></span>
+    <br>
+    <span>相關連結：<a href="https://gamerch.com/maimai/" target="_blank" style="color:#007bff;">maimai 攻略Wiki (gamerch)</a></span>
+  </div>
+
   <script src="script.js"></script>
 </body>
-</html>
 </html>

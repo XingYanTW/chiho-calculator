@@ -35,12 +35,12 @@ function calculate() {
   const logString = `
 === 輸入資料 ===
 隊長數: ${leader}
-擅長數: ${fav}
-不擅長數: ${unfav}
-歌曲獎勵: ${songBonus} Km
+擅長成員數: ${fav}
+不擅長成員數: ${unfav}
+獎勵樂曲: ${songBonus} Km
 遊玩獎勵: ${playBonus} Km
-實際曲數 (track): ${trackCount}
-票券倍率: ${ticketMultiplier}倍
+遊玩曲數: ${trackCount}
+加速券: ${ticketMultiplier}倍
 每道價格: ${perUnitPrice}$
 目標距離: ${targetDistance} Km
 
@@ -59,6 +59,9 @@ function calculate() {
 `;
 
   document.getElementById('result').textContent = (logString.trim());
+
+  // 自動捲動到結果區塊
+  document.getElementById('result').scrollIntoView({ behavior: 'smooth', block: 'center' });
 }
 
 document.getElementById('calculateBtn').addEventListener('click', calculate);
