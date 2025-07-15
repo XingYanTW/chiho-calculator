@@ -4,9 +4,14 @@ function tracksToUnits(trackCount) {
 }
 
 function calculate() {
-  const leader = parseInt(document.getElementById('leaderCount').value) || 0;
-  const fav = parseInt(document.getElementById('favCount').value) || 0;
-  const unfav = parseInt(document.getElementById('unfavCount').value) || 0;
+  const leader = 1; // 隊長固定為 1
+  // 取得4位成員的擅長/不擅長設定（checkbox 勾選為擅長）
+  let fav = 0, unfav = 0;
+  const selects = document.querySelectorAll('.member-type');
+  selects.forEach(sel => {
+    if (sel.checked) fav++;
+    else unfav++;
+  });
   const songBonus = parseInt(document.getElementById('songBonus').value) || 0;
   const playBonus = parseInt(document.getElementById('playBonus').value) || 0;
   const trackCount = parseInt(document.getElementById('trackCount').value) || 0;
@@ -28,18 +33,19 @@ function calculate() {
   const distance = Math.ceil((deluxePower + totalBonus) * trackCount * ticketMultiplier);
 
   // 本次價格
-  const totalCost = perUnitPrice * ticketMultiplier;
+  const totalCost = perUnitPrice + ticketCreditCost*100;
 
   // 每 km 價格
   const pricePerKm = (distance > 0) ? Math.ceil(totalCost / distance) : 0;
 
   // 反推計算：目標距離需要的道數與票券數
   // 反推時以 track 為單位
-  const needTracksRaw = targetDistance / ((deluxePower + totalBonus) * ticketMultiplier);
+  const needTracksRaw = targetDistance / distance;
   const needTracks = Math.ceil(needTracksRaw);
 
   // track 轉換成道數
-  const needUnits = Math.ceil(needTracks/trackCount);
+  const needUnitsRaw = targetDistance / distance;
+  const needUnits = Math.ceil(needUnitsRaw);
 
   // 每張票券包含道數
   const unitsPerTicket = 3; // 一張票券包含3道 (固定)
@@ -47,7 +53,7 @@ function calculate() {
   const ticketCount = Math.ceil(ticketCountRaw);
 
   // 反推總價格
-  const totalCostTarget = needUnits * perUnitPrice;
+  const totalCostTarget = (perUnitPrice + ticketCreditCost*100)*needUnits;
 
   // 顯示計算公式
   const formulaString =
@@ -72,10 +78,9 @@ function calculate() {
 每 Km 價格：約 ${pricePerKm} 円/km
 
 === 反推計算結果 ===
-所需曲數 = 目標距離 ÷ ((Deluxe Power + 遊玩獎勵 + 樂曲獎勵) × 曲目數(${trackCount}) × 票券倍率)
+所需道數 = 目標距離 ÷ ((Deluxe Power + 遊玩獎勵 + 樂曲獎勵) × 曲目數(${trackCount}) × 票券倍率)
          = ${targetDistance} ÷ ((${deluxePower} + ${totalBonus}) × ${trackCount} × ${ticketMultiplier})
-         ≈ ${needTracksRaw.toFixed(2)}
-所需曲數（向上取整）：${needTracks} 首
+         ≈ ${needUnitsRaw.toFixed(2)}
 所需道數：${needUnits} 道
 總花費：${totalCostTarget} 円
 `;

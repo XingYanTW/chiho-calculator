@@ -22,6 +22,7 @@ h1 {
 .input-group {
   margin-bottom: 15px;
   display: flex;
+  flex-wrap: wrap; /* 允許內容換行 */
   justify-content: space-between;
   align-items: center;
 }
@@ -39,6 +40,15 @@ h1 {
   font-size: 16px;
   border: 1.5px solid #ccc;
   border-radius: 5px;
+}
+
+/* 讓成員選擇區塊自動換行且間距適中 */
+#memberSelectBlock {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  min-width: 0;
+  flex: 2 1 320px;
 }
 
 button {
@@ -79,4 +89,36 @@ button {
   font-size: 16px;
   line-height: 1.5;
   white-space: pre-wrap;
+}
+
+.member-card {
+  background: #f7fafd;
+  border: 1.5px solid #cce0ff;
+  border-radius: 8px;
+  padding: 8px 6px;
+  text-align: center;
+  width: 80px;
+  font-size: 13px;
+  min-width: 80px;
+  margin-bottom: 5px;
+  box-sizing: border-box;
+}
+
+.member-card select {
+  margin-top: 4px;
+  width: 60px;
+}
+
+/* 響應式：小螢幕下調整成員卡片寬度 */
+@media (max-width: 600px) {
+  #memberSelectBlock {
+    gap: 6px;
+    justify-content: flex-start;
+  }
+  .member-card {
+    width: 70px;
+    min-width: 70px;
+    font-size: 12px;
+    padding: 6px 2px;
+  }
 }

@@ -10,16 +10,56 @@
   <div class="container">
     <h1>移動距離計算機</h1>
     <div class="input-group">
-      <label>隊長數：</label>
-      <input type="number" id="leaderCount" value="1" min="0" />
-    </div>
-    <div class="input-group">
-      <label>擅長數：</label>
-      <input type="number" id="favCount" value="4" min="0" />
-    </div>
-    <div class="input-group">
-      <label>不擅長數：</label>
-      <input type="number" id="unfavCount" value="0" min="0" />
+      <label>成員：</label>
+      <div id="memberSelectBlock" style="display:flex;gap:10px;">
+        <div class="member-card">
+          <div>隊長</div>
+          <img src="./assets/icon_chara_none.png" alt="leader" style="width:48px;height:48px;border-radius:50%;border:2px solid #007bff;">
+          <div style="margin-top:4px;">
+            <span style="color:#007bff;font-weight:bold;">固定擅長</span>
+          </div>
+        </div>
+        <div class="member-card">
+          <div>成員2</div>
+          <img src="./assets/icon_chara_none.png" alt="member2" style="width:48px;height:48px;border-radius:50%;">
+          <div style="margin-top:6px;">
+            <label style="font-size:12px;">
+              <input type="checkbox" class="member-type" data-index="0" checked>
+              擅長
+            </label>
+          </div>
+        </div>
+        <div class="member-card">
+          <div>成員3</div>
+          <img src="./assets/icon_chara_none.png" alt="member3" style="width:48px;height:48px;border-radius:50%;">
+          <div style="margin-top:6px;">
+            <label style="font-size:12px;">
+              <input type="checkbox" class="member-type" data-index="1" checked>
+              擅長
+            </label>
+          </div>
+        </div>
+        <div class="member-card">
+          <div>成員4</div>
+          <img src="./assets/icon_chara_none.png" alt="member4" style="width:48px;height:48px;border-radius:50%;">
+          <div style="margin-top:6px;">
+            <label style="font-size:12px;">
+              <input type="checkbox" class="member-type" data-index="2" checked>
+              擅長
+            </label>
+          </div>
+        </div>
+        <div class="member-card">
+          <div>成員5</div>
+          <img src="./assets/icon_chara_none.png" alt="member5" style="width:48px;height:48px;border-radius:50%;">
+          <div style="margin-top:6px;">
+            <label style="font-size:12px;">
+              <input type="checkbox" class="member-type" data-index="3" checked>
+              擅長
+            </label>
+          </div>
+        </div>
+      </div>
     </div>
     <div class="input-group">
       <label>歌曲獎勵 (Km)：</label>
@@ -39,15 +79,15 @@
       </select>
     </div>
     <div class="input-group">
-      <label>實際曲數 (track)：<span style="font-weight:normal;font-size:13px;">（單人1道=3首，雙人1道=4首，<span style="color:#c00;">本計算皆以3首=1道計價</span>）</span></label>
-      <input type="number" id="trackCount" value="4" min="1" />
+      <label>實際曲數 (track)：</label>
+      <input type="number" id="trackCount" value="4" min="3" max="4"/>
     </div>
     <div class="input-group">
       <label>票券倍率：</label>
       <select id="ticketType">
-        <option value="1,1">1倍 (1道1票券)</option>
-        <option value="2,1">2倍 (1道1票券，但距離算2倍)</option>
-        <option value="3,2">3倍 (1道2票券，距離算3倍)</option>
+        <option value="1,0">無</option>
+        <option value="2,1">ちほー進行2倍チケット</option>
+        <option value="3,2">ちほー進行3倍チケット</option>
       </select>
     </div>
     <div class="input-group">
@@ -67,4 +107,5 @@
 
   <script src="script.js"></script>
 </body>
+</html>
 </html>
