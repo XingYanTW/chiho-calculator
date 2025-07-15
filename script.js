@@ -39,19 +39,12 @@ function calculate() {
   const pricePerKm = (distance > 0) ? Math.ceil(totalCost / distance) : 0;
 
   // 反推計算：目標距離需要的道數與票券數
-  // 反推時以 track 為單位
-  const needTracksRaw = targetDistance / distance;
-  const needTracks = Math.ceil(needTracksRaw);
-
-  // track 轉換成道數
+  // 反推時以 track 為單位  // track 轉換成道數
   const needUnitsRaw = targetDistance / distance;
   const needUnits = Math.ceil(needUnitsRaw);
 
   // 每張票券包含道數
   const unitsPerTicket = 3; // 一張票券包含3道 (固定)
-  const ticketCountRaw = needUnits / unitsPerTicket;
-  const ticketCount = Math.ceil(ticketCountRaw);
-
   // 反推總價格
   const totalCostTarget = (perUnitPrice + ticketCreditCost*100)*needUnits;
 
