@@ -7,6 +7,26 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <button id="darkModeBtn" type="button" title="切換深色模式" style="position:fixed;top:22px;right:22px;z-index:1001;width:44px;height:44px;border-radius:50%;border:none;background:#fff;box-shadow:0 2px 8px rgba(0,0,0,0.08);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background 0.2s;">
+    <span id="darkModeIcon" style="font-size:22px;color:#333;display:flex;align-items:center;justify-content:center;">
+      <svg id="icon-moon" width="22" height="22" viewBox="0 0 22 22" fill="none" style="display:block;" xmlns="http://www.w3.org/2000/svg">
+        <path d="M17.5 12.5A7.5 7.5 0 0 1 9.5 4.5a.7.7 0 0 0-.8-.9A8.5 8.5 0 1 0 18.4 13.3a.7.7 0 0 0-.9-.8Z" fill="#333"/>
+      </svg>
+      <svg id="icon-sun" width="22" height="22" viewBox="0 0 22 22" fill="none" style="display:none;" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="11" cy="11" r="5" fill="#ffe066"/>
+        <g stroke="#ffe066" stroke-width="2">
+          <line x1="11" y1="1" x2="11" y2="4"/>
+          <line x1="11" y1="18" x2="11" y2="21"/>
+          <line x1="1" y1="11" x2="4" y2="11"/>
+          <line x1="18" y1="11" x2="21" y2="11"/>
+          <line x1="4.22" y1="4.22" x2="6.34" y2="6.34"/>
+          <line x1="15.66" y1="15.66" x2="17.78" y2="17.78"/>
+          <line x1="4.22" y1="17.78" x2="6.34" y2="15.66"/>
+          <line x1="15.66" y1="6.34" x2="17.78" y2="4.22"/>
+        </g>
+      </svg>
+    </span>
+  </button>
   <div class="container">
     <h1>移動距離計算機</h1>
     <div class="input-group">
@@ -113,7 +133,73 @@
     <br>
     <span>相關連結：<a href="https://gamerch.com/maimai/" target="_blank" style="color:#007bff;">maimai 攻略Wiki (gamerch)</a></span>
   </div>
-
   <script src="script.js"></script>
+  <script>
+    const darkBtn = document.getElementById('darkModeBtn');
+    const iconMoon = document.getElementById('icon-moon');
+    const iconSun = document.getElementById('icon-sun');
+
+    // 自動偵測系統/瀏覽器深色模式
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      document.body.classList.add('dark-mode');
+      darkBtn.style.background = '#23272f';
+      iconMoon.style.display = 'none';
+      iconSun.style.display = 'block';
+    }
+
+    // 儲存/載入 dark mode 狀態
+    if (localStorage.getItem('darkMode') === '1') {
+      document.body.classList.add('dark-mode');
+      darkBtn.style.background = '#23272f';
+      iconMoon.style.display = 'none';
+      iconSun.style.display = 'block';
+    }
+    darkBtn.addEventListener('click', function() {
+      document.body.classList.toggle('dark-mode');
+      const isDark = document.body.classList.contains('dark-mode');
+      if(isDark) {
+        darkBtn.style.background = '#23272f';
+        iconMoon.style.display = 'none';
+        iconSun.style.display = 'block';
+        localStorage.setItem('darkMode', '1');
+      } else {
+        darkBtn.style.background = '#e9ecef';
+        iconMoon.style.display = 'block';
+        iconSun.style.display = 'none';
+        localStorage.setItem('darkMode', '0');
+      }
+    });
+
+    // 儲存/載入表單資料
+    function saveForm() {
+      // 成員
+      const members = [];
+      document.querySelectorAll('.member-type').forEach(cb => members.push(cb.checked ? 1 : 0));
+      localStorage.setItem('members', JSON.stringify(members));
+      // 其他欄位
+      localStorage.setItem('songBonus', document.getElementById('songBonus').value);
+      localStorage.setItem('playBonus', document.getElementById('playBonus').value);
+      localStorage.setItem('trackCount', document.getElementById('trackCount').value);
+      localStorage.setItem('ticketType', document.getElementById('ticketType').value);
+      localStorage.setItem('perUnitPrice', document.getElementById('perUnitPrice').value);
+      localStorage.setItem('targetDistance', document.getElementById('targetDistance').value);
+    }
+    function loadForm() {
+      // 成員
+      const members = JSON.parse(localStorage.getItem('members') || '[1,1,1,1]');
+      document.querySelectorAll('.member-type').forEach((cb, i) => cb.checked = !!members[i]);
+      // 其他欄位
+      if(localStorage.getItem('songBonus')) document.getElementById('songBonus').value = localStorage.getItem('songBonus');
+      if(localStorage.getItem('playBonus')) document.getElementById('playBonus').value = localStorage.getItem('playBonus');
+      if(localStorage.getItem('trackCount')) document.getElementById('trackCount').value = localStorage.getItem('trackCount');
+      if(localStorage.getItem('ticketType')) document.getElementById('ticketType').value = localStorage.getItem('ticketType');
+      if(localStorage.getItem('perUnitPrice')) document.getElementById('perUnitPrice').value = localStorage.getItem('perUnitPrice');
+      if(localStorage.getItem('targetDistance')) document.getElementById('targetDistance').value = localStorage.getItem('targetDistance');
+    }
+    // 綁定事件
+    window.addEventListener('DOMContentLoaded', loadForm);
+    document.querySelectorAll('.member-type, #songBonus, #playBonus, #trackCount, #ticketType, #perUnitPrice, #targetDistance')
+      .forEach(el => el.addEventListener('change', saveForm));
+  </script>
 </body>
 </html>

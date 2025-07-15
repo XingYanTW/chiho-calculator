@@ -62,10 +62,13 @@ function calculate() {
 
   // 自動捲動到結果區塊
   document.getElementById('result').scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+  // 儲存最新結果
+  localStorage.setItem('lastResult', logString.trim());
 }
 
 document.getElementById('calculateBtn').addEventListener('click', calculate);
 
-document.getElementById('logBtn').addEventListener('click', () => {
+document.getElementById('logBtn')?.addEventListener('click', () => {
   alert(document.getElementById('result').textContent);
 });
